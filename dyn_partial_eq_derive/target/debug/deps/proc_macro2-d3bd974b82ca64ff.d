@@ -1,0 +1,12 @@
+/home/stames/Programming/rust/dyn_partial_eq/dyn_partial_eq_derive/target/debug/deps/proc_macro2-d3bd974b82ca64ff.rmeta: /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/lib.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/marker.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/parse.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/rcvec.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/detection.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/fallback.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/extra.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/wrapper.rs
+
+/home/stames/Programming/rust/dyn_partial_eq/dyn_partial_eq_derive/target/debug/deps/proc_macro2-d3bd974b82ca64ff.d: /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/lib.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/marker.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/parse.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/rcvec.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/detection.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/fallback.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/extra.rs /home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/wrapper.rs
+
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/lib.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/marker.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/parse.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/rcvec.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/detection.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/fallback.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/extra.rs:
+/home/stames/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-1.0.60/src/wrapper.rs:

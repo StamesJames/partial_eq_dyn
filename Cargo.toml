@@ -6,6 +6,5 @@ license = "MIT"
 keywords = ["dynamic"]
 description = "This crate and it's associatet derive crate enables the user to derive PartialEq for types with dyn objects"
 readme = "README.md"
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
