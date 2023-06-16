@@ -1,4 +1,4 @@
-use proc_macro::TokenStream;
+use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{
     self,
@@ -27,10 +27,10 @@ pub fn impl_partial_eq_dyn(ast: &syn::DeriveInput) -> TokenStream {
             }
         }
     };
-    gen_part_eq.into()
+    gen_part_eq
 }
 
-fn gen_part_eq_struct_fields(data: &DataStruct) -> quote::__private::TokenStream {
+fn gen_part_eq_struct_fields(data: &DataStruct) -> proc_macro2::TokenStream {
     match &data.fields {
         syn::Fields::Named(fields) => gen_part_eq_struct_named_fields(fields),
         syn::Fields::Unnamed(fields) => gen_part_eq_struct_unnamed_fields(fields),
@@ -38,19 +38,17 @@ fn gen_part_eq_struct_fields(data: &DataStruct) -> quote::__private::TokenStream
     }
 }
 
-fn gen_part_eq_struct_named_fields(fields: &FieldsNamed) -> quote::__private::TokenStream {
+fn gen_part_eq_struct_named_fields(fields: &FieldsNamed) -> proc_macro2::TokenStream {
     let (fields_named_left, fields_named_right, fields_named_comps) = make_named_fields(fields);
     quote!(match (self, other) {(Self{#fields_named_left}, Self{#fields_named_right}) => #fields_named_comps })
 }
-fn gen_part_eq_struct_unnamed_fields(fields: &FieldsUnnamed) -> quote::__private::TokenStream {
+fn gen_part_eq_struct_unnamed_fields(fields: &FieldsUnnamed) -> proc_macro2::TokenStream {
     let (fields_unnamed_left, fields_unnamed_right, fields_unnamed_comps) =
         make_unnamed_fields(fields);
     quote!(match (self, other) { (Self(#fields_unnamed_left), Self(#fields_unnamed_right)) => #fields_unnamed_comps })
 }
 
-fn gen_part_eq_enum_variants(
-    varaints: &Punctuated<Variant, Comma>,
-) -> quote::__private::TokenStream {
+fn gen_part_eq_enum_variants(varaints: &Punctuated<Variant, Comma>) -> proc_macro2::TokenStream {
     let mut gen_match_arms = quote!();
     for variant in varaints {
         let variant_name = &variant.ident;
@@ -76,52 +74,47 @@ fn gen_part_eq_enum_variants(
             }
         }
     }
-    return quote! {
+    quote! {
         match (self, other) {
             #gen_match_arms
             _ => false
         }
-    };
+    }
 }
 
 fn make_comp_for_type(
     left_name: &Ident,
     right_name: &Ident,
     ty: &Type,
-) -> quote::__private::TokenStream {
+) -> proc_macro2::TokenStream {
     match ty {
         TraitObject(_) => quote!(#left_name.any_eq(#right_name.as_any())),
-        Type::Reference(ty) => make_comp_for_type(left_name, right_name, &*ty.elem),
+        Type::Reference(ty) => make_comp_for_type(left_name, right_name, &ty.elem),
         Type::Path(TypePath {
             path: Path { segments, .. },
             ..
         }) => {
-            if segments.iter().any(|segment| match &segment.arguments {
-                syn::PathArguments::AngleBracketed(args) => args.args.iter().any(|arg| match arg {
-                    syn::GenericArgument::Type(ty) => match ty {
-                        TraitObject(_) => true,
-                        _ => false,
-                    },
-                    _ => false,
-                }),
+            match segments.iter().any(|segment| match &segment.arguments {
+                syn::PathArguments::AngleBracketed(args) => args
+                    .args
+                    .iter()
+                    .any(|arg| matches!(arg, syn::GenericArgument::Type(TraitObject(_)))),
                 _ => false,
             }) {
-                quote!(#left_name.any_eq(#right_name.as_any()))
-            } else {
-                quote!(#left_name == #right_name)
+                true => quote!(#left_name.any_eq(#right_name.as_any())),
+                false => quote!(#left_name == #right_name),
             }
         }
         _ => quote!(#left_name == #right_name),
     }
-    // quote!(#left_name.any_eq(#right_name.as_any()))
 }
 
 fn make_named_fields(
     fields: &FieldsNamed,
 ) -> (
-    quote::__private::TokenStream,
-    quote::__private::TokenStream,
-    quote::__private::TokenStream,
+    proc_macro2::TokenStream,
+    proc_macro2::TokenStream,
+    proc_macro2::TokenStream,
 ) {
     let mut fields_named_left = quote!();
     let mut fields_named_right = quote!();
@@ -142,14 +135,14 @@ fn make_named_fields(
 fn make_unnamed_fields(
     fields: &FieldsUnnamed,
 ) -> (
-    quote::__private::TokenStream,
-    quote::__private::TokenStream,
-    quote::__private::TokenStream,
+    proc_macro2::TokenStream,
+    proc_macro2::TokenStream,
+    proc_macro2::TokenStream,
 ) {
     let mut fields_unnamed_left = quote!();
     let mut fields_unnamed_right = quote!();
     let mut fields_unnamed_comps = quote!(true);
-    for (n, field) in (&fields.unnamed).iter().enumerate() {
+    for (n, field) in fields.unnamed.iter().enumerate() {
         let left_name = format_ident!("l_{}", n);
         let right_name = format_ident!("r_{}", n);
         fields_unnamed_left = quote! { #left_name , #fields_unnamed_left };

@@ -1,4 +1,4 @@
-use proc_macro::TokenStream;
+use proc_macro2::TokenStream;
 use quote::quote;
 
 pub fn impl_as_any(ast: &syn::DeriveInput) -> TokenStream {
@@ -10,5 +10,4 @@ pub fn impl_as_any(ast: &syn::DeriveInput) -> TokenStream {
             }
         }
     }
-    .into()
 }
