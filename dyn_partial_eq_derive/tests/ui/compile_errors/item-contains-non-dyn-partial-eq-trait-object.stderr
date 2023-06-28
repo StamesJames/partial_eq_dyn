@@ -1,0 +1,10 @@
+error[E0599]: no method named `dyn_eq` found for reference `&Box<(dyn TestTrait + 'static)>` in the current scope
+ --> tests/ui/compile_errors/item-contains-non-dyn-partial-eq-trait-object.rs:6:10
+  |
+6 | #[derive(PartialEqDyn)]
+  |          ^^^^^^^^^^^^ method not found in `&Box<dyn TestTrait>`
+  |
+  = help: items from traits can only be used if the trait is implemented and in scope
+  = note: the following trait defines an item `dyn_eq`, perhaps you need to implement it:
+          candidate #1: `DynPartialEq`
+  = note: this error originates in the derive macro `PartialEqDyn` (in Nightly builds, run with -Z macro-backtrace for more info)

@@ -1,0 +1,10 @@
+error[E0599]: no method named `as_any` found for reference `&Box<(dyn NonAsAny + 'static)>` in the current scope
+ --> tests/ui/compile_errors/item-contains-non-as-any-trait-object.rs:6:10
+  |
+6 | #[derive(PartialEqDyn)]
+  |          ^^^^^^^^^^^^ method not found in `&Box<dyn NonAsAny>`
+  |
+  = help: items from traits can only be used if the trait is implemented and in scope
+  = note: the following trait defines an item `as_any`, perhaps you need to implement it:
+          candidate #1: `AsAny`
+  = note: this error originates in the derive macro `PartialEqDyn` (in Nightly builds, run with -Z macro-backtrace for more info)

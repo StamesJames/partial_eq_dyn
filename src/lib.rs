@@ -13,11 +13,14 @@ use std::any::Any;
 /// }
 /// let test_any: &dyn Any = Test.as_any();
 /// ```
+/// or use the derive macro
+/// types you whant to make dynamicaly comparable need this as supertrait
 pub trait AsAny: Any {
     fn as_any(&self) -> &dyn Any;
 }
 
-/// Use this as supertrait of a Trait you want to compare as dyn object.
+/// Use this to implement the functionality to compare a Type to an Any Object.
+/// Most of the times you want your own type to also be an AsAny implementor so the implementation of DynPartialEq becomes a simple downcast like this:
 /// ```
 /// # use std::any::Any;
 /// # use dyn_partial_eq::{DynPartialEq, AsAny};

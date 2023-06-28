@@ -1,3 +1,3 @@
 # dyn_partial_eq_derive
 
-Use the derive DynPartialEq to derive the DynPartialEq trait which will be implementet by trying zu cast the other object of the comparisson to the implementor. Use PartialEqDyn to impement PartialEq with a componentwise comparisson that uses the eq method on all types that implement PartialEq and dyn_eq on all others.
+To implement PartialEq on Types with TraitObject fields you can use the derive Macro PartialEqDyn. The Implementation needs the Traits that are present as TraitObjects to have AsAny and DynPartialEq as supertraits. For those Traits there also exist derive macros AsAny and DynPartialEq.

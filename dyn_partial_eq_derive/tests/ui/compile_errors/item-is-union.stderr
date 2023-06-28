@@ -1,0 +1,7 @@
+error: proc-macro derive panicked
+ --> tests/ui/compile_errors/item-is-union.rs:3:10
+  |
+3 | #[derive(PartialEqDyn)]
+  |          ^^^^^^^^^^^^
+  |
+  = help: message: Since standart PartialEq can't be derived for Unions we also don't derive a dynamic PartialEq
