@@ -6,6 +6,7 @@ license = "MIT OR Apache-2.0"
 keywords = ["dynamic", "derive"]
 description = "Derives for PartialEq on structs and enums with trait objects"
 readme = "README.md"
+repository = "https://github.com/StamesJames/dyn_partial_eq/tree/main/dyn_partial_eq_derive"
 
 [lib]
 proc-macro = true
