@@ -21,7 +21,7 @@ pub fn impl_partial_eq_dyn(ast: &syn::DeriveInput) -> TokenStream {
         syn::Data::Enum(data) => gen_part_eq_enum_data(data),
         syn::Data::Union(_) =>
             panic!(
-                "Since standart PartialEq can't be derived for Unions we also don't derive a dynamic PartialEq"
+                "Since standard PartialEq can't be derived for Unions we also don't derive a dynamic PartialEq"
             ),
     };
     let gen_part_eq = quote! {

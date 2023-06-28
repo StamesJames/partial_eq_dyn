@@ -2,9 +2,9 @@
 name = "dyn_partial_eq_derive"
 version = "0.1.0"
 edition = "2021"
-license = "MIT"
+license = "MIT OR Apache-2.0"
 keywords = ["dynamic", "derive"]
-description = "This crate enables you to derive PertialEq for types that hold dyn objects by using the  DynPartialEq from the associated crate dyn_partial_eq"
+description = "Derives for PartialEq on structs and enums with trait objects"
 readme = "README.md"
 
 [lib]

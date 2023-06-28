@@ -1,23 +1,67 @@
+//!# Disclaimer
+
+//!This is the first crate I published so I am new to making things production ready. Therefore use this crate with caution and feedback is welcome.
+//! # dyn_partial_eq_derive
+//!
+//! To implement PartialEq on types with trait object fields you can use the derive macro PartialEqDyn. The implementation needs the traits that are present as trait objects to have AsAny and DynPartialEq as supertraits. For those traits there also exist derive macros AsAny and DynPartialEq.
+//!Here an Example:
+//!```
+//!use dyn_partial_eq::{AsAny, DynPartialEq};
+//!use dyn_partial_eq_derive::{AsAny, DynPartialEq, PartialEqDyn};
+//!
+//!trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
+//!
+//!#[derive(AsAny, DynPartialEq, PartialEq)]
+//!struct TestTraitImplementor(i32);
+//!
+//!impl TestTrait for TestTraitImplementor {}
+//!
+//!#[derive(PartialEqDyn)]
+//!struct TestStruct {
+//!    field1: i32,
+//!    field2: Box<i32>,
+//!    field3: Box<dyn TestTrait>,
+//!}
+//!```
+//!
+//!Or if the type implements the trait itself:
+//!
+//!```
+//!use dyn_partial_eq::{AsAny, DynPartialEq};
+//!use dyn_partial_eq_derive::{AsAny, DynPartialEq, PartialEqDyn};
+//!
+//!trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
+//!
+//!#[derive(AsAny, DynPartialEq, PartialEqDyn)]
+//!struct TestStruct {
+//!    field1: i32,
+//!    field2: Box<i32>,
+//!    field3: Option<dyn TestTrait>,
+//!}
+//!
+//!impl TestTrait for TestStruct {}
+//!```
+
 use proc_macro::TokenStream;
 mod as_any_derive;
 mod dyn_partial_eq_derive;
 mod partial_eq_dyn_derive;
 
-/// This derives the AsAny Trait in its most easy form of an identity function
+/// This derives the AsAny trait in its most easy form of an identity function
 #[proc_macro_derive(AsAny)]
 pub fn as_any_derive(input: TokenStream) -> TokenStream {
     let ast = as_any_derive::parse(input.into());
     as_any_derive::impl_as_any(&ast).into()
 }
 
-/// This derives the DynPartialEq Trait by simple downcasting the Any Object to the given type and calling the regular PartialEq comparisson. Therefor your Type has to implement PartialEq
+/// This derives the DynPartialEq trait by simple downcasting the Any Object to the given type and calling the regular PartialEq comparison. Therefor your Type has to implement PartialEq
 #[proc_macro_derive(DynPartialEq)]
 pub fn dyn_partial_eq_derive(input: TokenStream) -> TokenStream {
     let ast = dyn_partial_eq_derive::parse(input.into());
     dyn_partial_eq_derive::impl_dyn_partial_eq(&ast).into()
 }
 
-/// This derives PartialEq but manages Trait Objects by calling their dyn_eq methods and casting. To work all Trait Objects have to be boundet by DynPartialEq and AsAny.
+/// This derives PartialEq but manages trait Objects by calling their dyn_eq methods and casting. To work all trait Objects have to be bounded by DynPartialEq and AsAny.
 #[proc_macro_derive(PartialEqDyn)]
 pub fn partial_eq_any_eq_derive(input: TokenStream) -> TokenStream {
     let ast = partial_eq_dyn_derive::parse(input.into());
