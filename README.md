@@ -1,3 +1,7 @@
+# Disclaimer
+
+This is the first crate I published so I am new to making things production ready. Therefore use this crate with caution and feedback is welcome.
+
 # dyn_partial_eq
 
 Implement the DynPartialEq trait with explicit casting to enable comparison between any dyn objects. There also is an associated derive crate dyn_partial_eq_derive that derives the component wise implementation of PartialEq and uses dyn_eq for all dyn_objects.
