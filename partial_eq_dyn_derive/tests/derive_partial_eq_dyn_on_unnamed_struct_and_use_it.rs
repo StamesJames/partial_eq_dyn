@@ -11,7 +11,8 @@ impl TestTrait for TestTraitImplementor {}
 #[derive(PartialEqDyn, Debug)]
 struct TestStruct(i32, Box<i32>, Box<dyn TestTrait>);
 
-fn main() {
+#[test]
+fn derive_partial_eq_dyn_on_unnamed_struct_and_use_it() {
     let first = TestStruct(1, Box::<i32>::new(2), Box::new(TestTraitImplementor(3)));
     let second = TestStruct(1, Box::<i32>::new(2), Box::new(TestTraitImplementor(3)));
     assert_eq!(first, second);

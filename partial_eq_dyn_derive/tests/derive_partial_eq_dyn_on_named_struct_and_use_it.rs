@@ -15,7 +15,8 @@ struct TestStruct {
     field3: Box<dyn TestTrait>,
 }
 
-fn main() {
+#[test]
+fn derive_partial_eq_dyn_on_named_struct_and_use_it() {
     let first = TestStruct {
         field1: 1,
         field2: Box::<i32>::new(2),

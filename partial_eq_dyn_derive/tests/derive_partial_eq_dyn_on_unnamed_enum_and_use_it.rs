@@ -17,7 +17,8 @@ enum TestEnum {
     Variant2(i32, Box<i32>, Box<dyn TestTrait>),
 }
 
-fn main() {
+#[test]
+fn derive_partial_eq_dyn_on_unnamed_enum_and_use_it() {
     let first = TestEnum::Variant1(
         1,
         Box::<i32>::new(2),

@@ -9,7 +9,7 @@
 //!use partial_eq_dyn::{AsAny, DynPartialEq};
 //!use partial_eq_dyn_derive::{AsAny, DynPartialEq, PartialEqDyn};
 //!
-//!trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
+//!trait TestTrait:AsAny + DynPartialEq {}
 //!
 //!#[derive(AsAny, DynPartialEq, PartialEq)]
 //!struct TestTraitImplementor(i32);
@@ -29,17 +29,19 @@
 //!```
 //!use partial_eq_dyn::{AsAny, DynPartialEq};
 //!use partial_eq_dyn_derive::{AsAny, DynPartialEq, PartialEqDyn};
-//!
-//!trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
+//!trait TestTrait: AsAny + DynPartialEq {}
 //!
 //!#[derive(AsAny, DynPartialEq, PartialEqDyn)]
-//!struct TestStruct {
-//!    field1: i32,
-//!    field2: Box<i32>,
-//!    field3: Option<dyn TestTrait>,
+//!enum TestEnum {
+//!    Some {
+//!        field1: i32,
+//!        field2: Box<i32>,
+//!        field3: Box<dyn TestTrait>,
+//!    },
+//!    None,
 //!}
 //!
-//!impl TestTrait for TestStruct {}
+//!impl TestTrait for TestEnum {}
 //!```
 
 use proc_macro::TokenStream;

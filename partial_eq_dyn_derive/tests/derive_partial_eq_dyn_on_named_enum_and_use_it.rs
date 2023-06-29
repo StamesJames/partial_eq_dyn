@@ -6,7 +6,7 @@ trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
 #[derive(AsAny, DynPartialEq, PartialEq, Debug)]
 enum TestTraitImplementor {
     Variant1 { field: i32 },
-    Variant2(i32),
+    Variant2 { field: i32 },
 }
 
 impl TestTrait for TestTraitImplementor {}
@@ -18,10 +18,15 @@ enum TestEnum {
         field2: Box<i32>,
         field3: Box<dyn TestTrait>,
     },
-    Variant2(i32, Box<i32>, Box<dyn TestTrait>),
+    Variant2 {
+        field1: i32,
+        field2: Box<i32>,
+        field3: Box<dyn TestTrait>,
+    },
 }
 
-fn main() {
+#[test]
+fn derive_partial_eq_dyn_on_named_enum_and_use_it() {
     let first = TestEnum::Variant1 {
         field1: 1,
         field2: Box::<i32>::new(2),
@@ -36,31 +41,31 @@ fn main() {
     let first = TestEnum::Variant1 {
         field1: 1,
         field2: Box::<i32>::new(2),
-        field3: Box::new(TestTraitImplementor::Variant2(3)),
+        field3: Box::new(TestTraitImplementor::Variant2 { field: 3 }),
     };
     let second = TestEnum::Variant1 {
         field1: 1,
         field2: Box::<i32>::new(2),
-        field3: Box::new(TestTraitImplementor::Variant2(3)),
+        field3: Box::new(TestTraitImplementor::Variant2 { field: 3 }),
     };
     assert_eq!(first, second);
     let other = TestEnum::Variant1 {
         field1: 2,
         field2: Box::<i32>::new(2),
-        field3: Box::new(TestTraitImplementor::Variant2(3)),
+        field3: Box::new(TestTraitImplementor::Variant2 { field: 3 }),
     };
     assert_ne!(first, other);
     let other = TestEnum::Variant1 {
         field1: 1,
         field2: Box::<i32>::new(2),
-        field3: Box::new(TestTraitImplementor::Variant2(4)),
+        field3: Box::new(TestTraitImplementor::Variant2 { field: 4 }),
     };
     assert_ne!(first, other);
-    let other = TestEnum::Variant2(
-        1,
-        Box::<i32>::new(2),
-        Box::new(TestTraitImplementor::Variant2(3)),
-    );
+    let other = TestEnum::Variant2 {
+        field1: 1,
+        field2: Box::<i32>::new(2),
+        field3: Box::new(TestTraitImplementor::Variant2 { field: 3 }),
+    };
     assert_ne!(first, other);
     let other = TestEnum::Variant1 {
         field1: 1,
