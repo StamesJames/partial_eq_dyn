@@ -4,4 +4,4 @@ error: proc-macro derive panicked
 3 | #[derive(PartialEqDyn)]
   |          ^^^^^^^^^^^^
   |
-  = help: message: Since standart PartialEq can't be derived for Unions we also don't derive a dynamic PartialEq
+  = help: message: Since standard PartialEq can't be derived for Unions we also don't derive a dynamic PartialEq

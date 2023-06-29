@@ -1,13 +1,13 @@
 //!# Disclaimer
 
 //!This is the first crate I published so I am new to making things production ready. Therefore use this crate with caution and feedback is welcome.
-//! # dyn_partial_eq_derive
+//! # partial_eq_dyn_derive
 //!
 //! To implement PartialEq on types with trait object fields you can use the derive macro PartialEqDyn. The implementation needs the traits that are present as trait objects to have AsAny and DynPartialEq as supertraits. For those traits there also exist derive macros AsAny and DynPartialEq.
 //!Here an Example:
 //!```
-//!use dyn_partial_eq::{AsAny, DynPartialEq};
-//!use dyn_partial_eq_derive::{AsAny, DynPartialEq, PartialEqDyn};
+//!use partial_eq_dyn::{AsAny, DynPartialEq};
+//!use partial_eq_dyn_derive::{AsAny, DynPartialEq, PartialEqDyn};
 //!
 //!trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
 //!
@@ -27,8 +27,8 @@
 //!Or if the type implements the trait itself:
 //!
 //!```
-//!use dyn_partial_eq::{AsAny, DynPartialEq};
-//!use dyn_partial_eq_derive::{AsAny, DynPartialEq, PartialEqDyn};
+//!use partial_eq_dyn::{AsAny, DynPartialEq};
+//!use partial_eq_dyn_derive::{AsAny, DynPartialEq, PartialEqDyn};
 //!
 //!trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
 //!

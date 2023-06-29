@@ -1,5 +1,5 @@
-use dyn_partial_eq::DynPartialEq;
-use dyn_partial_eq_derive::PartialEqDyn;
+use partial_eq_dyn::DynPartialEq;
+use partial_eq_dyn_derive::PartialEqDyn;
 
 trait NonAsAny: DynPartialEq {}
 

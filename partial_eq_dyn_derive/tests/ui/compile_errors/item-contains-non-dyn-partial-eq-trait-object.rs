@@ -1,5 +1,5 @@
-use dyn_partial_eq::AsAny;
-use dyn_partial_eq_derive::PartialEqDyn;
+use partial_eq_dyn::AsAny;
+use partial_eq_dyn_derive::PartialEqDyn;
 
 trait TestTrait: AsAny {}
 

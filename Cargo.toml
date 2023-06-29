@@ -1,11 +1,11 @@
 [package]
-name = "dyn_partial_eq"
+name = "partial_eq_dyn"
 version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 keywords = ["dynamic"]
-description = "Two traits to enable PartialEq for types with trait objects as fields. Best used with the derives in dyn_partial_eq_derive"
+description = "Two traits to enable PartialEq for types with trait objects as fields. Best used with the derives in partial_eq_dyn_derive"
 readme = "README.md"
-repository = "https://github.com/StamesJames/dyn_partial_eq"
+repository = "https://github.com/StamesJames/partial_eq_dyn"
 
 [dependencies]

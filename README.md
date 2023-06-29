@@ -2,15 +2,15 @@
 
 This is the first crate I published so I am new to making things production ready. Therefore use this crate with caution and feedback is welcome.
 
-# dyn_partial_eq
+# partial_eq_dyn
 
-Implement the DynPartialEq trait with explicit casting to enable comparison between any dyn objects. There also is an associated derive crate dyn_partial_eq_derive that derives the component wise implementation of PartialEq and uses dyn_eq for all dyn_objects.
+Implement the DynPartialEq trait with explicit casting to enable comparison between any dyn objects. There also is an associated derive crate partial_eq_dyn_derive that derives the component wise implementation of PartialEq and uses dyn_eq for all dyn_objects.
 Simply set AsAny and DynPartialEq as supertraits of all traits you want to use and then derive PartialEqDyn on all types you want to compare and that contain those traits. AsAny and DynPartialEq also can be derived automatically.
 
 AsAny for example can be implemented like this. 
 ```
 use std::any::Any;
-use dyn_partial_eq::AsAny;
+use partial_eq_dyn::AsAny;
 struct Test;
 impl AsAny for Test{
     fn as_any(&self) -> &dyn Any {
@@ -24,7 +24,7 @@ And DynPartialEq can be implemented like this
 
 ```
 use std::any::Any;
-use dyn_partial_eq::{DynPartialEq, AsAny};
+use partial_eq_dyn::{DynPartialEq, AsAny};
 
 trait TestTrait: DynPartialEq + AsAny{}
 

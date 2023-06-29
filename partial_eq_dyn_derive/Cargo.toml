@@ -1,12 +1,12 @@
 [package]
-name = "dyn_partial_eq_derive"
+name = "partial_eq_dyn_derive"
 version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 keywords = ["dynamic", "derive"]
 description = "Derives for PartialEq on structs and enums with trait objects"
 readme = "README.md"
-repository = "https://github.com/StamesJames/dyn_partial_eq/tree/main/dyn_partial_eq_derive"
+repository = "https://github.com/StamesJames/partial_eq_dyn"
 
 [lib]
 proc-macro = true
@@ -15,7 +15,7 @@ proc-macro = true
 proc-macro2 = "1.0.60"
 quote = "1.0.28"
 syn = "2.0.18"
-dyn_partial_eq = {version = "0.1.0", path = "../"}
+partial_eq_dyn = {version = "0.1.0", path = "../"}
 
 [dev-dependencies]
 trybuild = "1.0.80"

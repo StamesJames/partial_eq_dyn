@@ -1,4 +1,4 @@
-use dyn_partial_eq_derive::PartialEqDyn;
+use partial_eq_dyn_derive::PartialEqDyn;
 
 #[derive(PartialEqDyn)]
 union SomeUnion {

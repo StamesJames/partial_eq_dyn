@@ -1,5 +1,5 @@
-use dyn_partial_eq::{AsAny, DynPartialEq};
-use dyn_partial_eq_derive::{AsAny, DynPartialEq, PartialEqDyn};
+use partial_eq_dyn::{AsAny, DynPartialEq};
+use partial_eq_dyn_derive::{AsAny, DynPartialEq, PartialEqDyn};
 
 trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
 

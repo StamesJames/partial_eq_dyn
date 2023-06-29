@@ -1,5 +1,5 @@
-use dyn_partial_eq::{AsAny, DynPartialEq};
-use dyn_partial_eq_derive::{AsAny, DynPartialEq, PartialEqDyn};
+use partial_eq_dyn::{AsAny, DynPartialEq};
+use partial_eq_dyn_derive::{AsAny, DynPartialEq, PartialEqDyn};
 
 trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
 
@@ -7,7 +7,7 @@ trait TestTrait: core::fmt::Debug + AsAny + DynPartialEq {}
 struct TestStruct {
     field1: i32,
     field2: Box<i32>,
-    field3: Option<dyn TestTrait>,
+    field3: Option<&'static dyn TestTrait>,
 }
 
 impl TestTrait for TestStruct {}
@@ -16,39 +16,39 @@ fn main() {
     let first = TestStruct {
         field1: 1,
         field2: Box::<i32>::new(2),
-        field3: Some(TestStruct {
+        field3: Some(&TestStruct {
             field1: 1,
             field2: Box::<i32>::new(2),
-            field3: Box::new(None),
+            field3: None,
         }),
     };
     let second = TestStruct {
         field1: 1,
         field2: Box::<i32>::new(2),
-        field3: Some(TestStruct {
+        field3: Some(&TestStruct {
             field1: 1,
             field2: Box::<i32>::new(2),
-            field3: Box::new(None),
+            field3: None,
         }),
     };
     assert_eq!(first, second);
     let other1 = TestStruct {
         field1: 2,
         field2: Box::<i32>::new(2),
-        field3: Some(TestStruct {
+        field3: Some(&TestStruct {
             field1: 1,
             field2: Box::<i32>::new(2),
-            field3: Box::new(None),
+            field3: None,
         }),
     };
     assert_ne!(first, other1);
     let other2 = TestStruct {
         field1: 1,
         field2: Box::<i32>::new(2),
-        field3: Some(TestStruct {
+        field3: Some(&TestStruct {
             field1: 2,
             field2: Box::<i32>::new(2),
-            field3: Box::new(None),
+            field3: None,
         }),
     };
     assert_ne!(first, other2);
