@@ -16,6 +16,7 @@ pub fn parse(input: TokenStream) -> DeriveInput {
 pub fn impl_partial_eq_dyn(ast: &syn::DeriveInput) -> TokenStream {
     let item_ident = &ast.ident;
     let item_data = &ast.data;
+    let (impl_generics, ty_generics, where_clause) = ast.generics.split_for_impl();
     let gen_field_comps = match item_data {
         syn::Data::Struct(data) => gen_part_eq_struct_data(data),
         syn::Data::Enum(data) => gen_part_eq_enum_data(data),
@@ -25,7 +26,7 @@ pub fn impl_partial_eq_dyn(ast: &syn::DeriveInput) -> TokenStream {
             ),
     };
     let gen_part_eq = quote! {
-        impl PartialEq for #item_ident {
+        impl #impl_generics PartialEq for #item_ident #ty_generics #where_clause {
             fn eq(&self, other: &Self) -> bool {
                 #gen_field_comps
             }
